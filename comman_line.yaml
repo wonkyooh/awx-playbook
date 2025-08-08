@@ -1,0 +1,21 @@
+---
+- name: test in-line-command
+  hosts: all
+  tasks:
+    - name: test1
+      become: true
+      command: "{{ var_cmd }}"
+      register: reg_echo
+      tags: tag_sudo
+      args:
+        executable: /bin/bash
+    - name: test1
+      become: true
+      command: "{{ var_cmd }}"
+      register: reg_echo
+      tags: tag_no_sudo
+      args:
+        executable: /bin/bash
+    - name: print reg
+      debug:
+        msg: "{{ reg_echo }}"
